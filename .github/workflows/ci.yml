@@ -18,5 +18,6 @@ jobs:
       - name: multiline
         run: |
           echo "Hello multiline script"
+          brew install --cask flutter
           flutter --version
         shell: bash
