@@ -1,4 +1,4 @@
-name: GitHub Actions Sample
+name: Build scrptr
 on:
   push:
     branches: [ main ]
@@ -9,23 +9,24 @@ on:
   workflow_dispatch:
 
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    name: Experimenting
+    name: Build on macOS
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
-      - run: ls
-      - name: multiline
+      - name: Install Flutter and build
         run: |
-          echo "Hello multiline script"
           brew install --cask flutter
           flutter --version
           flutter pub get
           flutter analyze
           flutter build macos
         shell: bash
+      - name: Build dmg file
+        run: |
+          hdiutil create scrptr-rw.dmg -ov -volname "scrptr" -fs HFS+ -srcfolder "build/macos/Build/Products/Release/scrptr.app"
+          hdiutil convert scrptr-rw.dmg -format UDZO -o scrptr.dmg
       - uses: actions/upload-artifact@v3
         with:
-          name: macos-scrptr
-          path: build/macos/Build/Products/Release
+          name: Upload scrptr.dmg release
+          path: scrptr.dmg
