@@ -1,7 +1,7 @@
 name: GitHub Actions Sample
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths-ignore:
       - '**/README.md'
       - 'LICENSE'
