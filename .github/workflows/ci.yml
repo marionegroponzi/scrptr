@@ -5,10 +5,18 @@ on:
     paths-ignore:
       - '**/README.md'
       - 'LICENSE'
+
+  workflow_dispatch:
+
 jobs:
   # This workflow contains a single job called "build"
   build:
-    name: flutter build
+    name: Experimenting
     runs-on: macos-latest
     steps:
       - run: echo "Hello world"
+      - name: multiline
+        run: |
+          echo "Hello multiline script"
+          flutter --version
+        shell: bash
