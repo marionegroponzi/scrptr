@@ -26,6 +26,7 @@ jobs:
         run: |
           hdiutil create scrptr-rw.dmg -ov -volname "scrptr" -fs HFS+ -srcfolder "build/macos/Build/Products/Release/scrptr.app"
           hdiutil convert scrptr-rw.dmg -format UDZO -o scrptr.dmg
+        shell: bash
       - uses: actions/upload-artifact@v3
         with:
           name: Upload scrptr.dmg release
