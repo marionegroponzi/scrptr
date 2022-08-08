@@ -20,4 +20,11 @@ jobs:
           echo "Hello multiline script"
           brew install --cask flutter
           flutter --version
+          flutter pub get
+          flutter analyze
+          flutter build macos
         shell: bash
+      - uses: actions/upload-artifact@v3
+        with:
+          name: macos-scrptr
+          path: build/macos/Build/Products/Release
