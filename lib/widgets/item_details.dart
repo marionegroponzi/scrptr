@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:scrptr/models/item.dart';
 
 class ItemDetails extends StatelessWidget {
@@ -11,8 +15,26 @@ class ItemDetails extends StatelessWidget {
   final bool isInTabletLayout;
   final Item? item;
 
-  _onPressed() {
-    debugPrint("log");
+  _onPressed() async {
+    debugPrint("Running ${item?.subtitle ?? '...nope'}");
+    final directory = (await getApplicationDocumentsDirectory()).path;
+    debugPrint(directory);
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+    if (result != null) {
+      File file = File(result.files.single.path!);
+      debugPrint(result.files.single.path!);
+      final ex_result = await Process.run('cat', [result.files.single.path!]);
+      debugPrint(ex_result.stdout.toString());
+
+
+
+    } else {
+      // User canceled the picker
+    }
+      // setState(() {
+      //   file = io.Directory("$directory/resume/").listSync();  //use your folder name instead of resume.
+      // });
   }
 
   @override
@@ -21,10 +43,6 @@ class ItemDetails extends StatelessWidget {
     final Widget content = Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // Text(
-        //   item?.title ?? '',
-        //   style: textTheme.headline3,
-        // ),
         Expanded(
           child: Container(),
         ),
@@ -46,10 +64,9 @@ class ItemDetails extends StatelessWidget {
                   // Background color
                   primary: Theme.of(context).colorScheme.primary,
                 ).copyWith(elevation: ButtonStyleButton.allOrNull(10.0)),
-                // style: TextButton.styleFrom(backgroundColor: Colors.blue),
                 onPressed: _onPressed,
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(12.0),
                   child: Text(
                     "Run",
                     textScaleFactor: 1.4,
