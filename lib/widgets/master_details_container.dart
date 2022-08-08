@@ -44,7 +44,7 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
   }
 
   Widget _buildEmptyLayout() {
-    return Center(
+    return const Center(
       child: Text("Too small..."),
     );
   }

@@ -22,10 +22,10 @@ class ItemDetails extends StatelessWidget {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
 
     if (result != null) {
-      File file = File(result.files.single.path!);
+      // File file = File(result.files.single.path!);
       debugPrint(result.files.single.path!);
-      final ex_result = await Process.run('cat', [result.files.single.path!]);
-      debugPrint(ex_result.stdout.toString());
+      final exResult = await Process.run('cat', [result.files.single.path!]);
+      debugPrint(exResult.stdout.toString());
 
 
 
