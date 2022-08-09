@@ -9,25 +9,39 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    name: Build on macOS
-    runs-on: macos-latest
+#  build-macos:
+#    name: Build on macOS
+#    runs-on: macos-latest
+#    steps:
+#      - uses: actions/checkout@v3
+#      - name: Install Flutter and build
+#        run: |
+#          brew install --cask flutter
+#          flutter --version
+#          flutter pub get
+#          flutter analyze
+#          flutter build macos
+#        shell: bash
+#      - name: Build dmg file
+#        run: |
+#          hdiutil create scrptr-rw.dmg -ov -volname "scrptr" -fs HFS+ -srcfolder "build/macos/Build/Products/Release/scrptr.app"
+#          hdiutil convert scrptr-rw.dmg -format UDZO -o scrptr.dmg
+#        shell: bash
+#      - uses: actions/upload-artifact@v3
+#        with:
+#          name: Upload scrptr.dmg release
+#          path: scrptr.dmg
+  build-windows:
+    name: Build on Windows
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
       - name: Install Flutter and build
         run: |
-          brew install --cask flutter
+          choco install flutter
           flutter --version
           flutter pub get
           flutter analyze
-          flutter build macos
-        shell: bash
-      - name: Build dmg file
-        run: |
-          hdiutil create scrptr-rw.dmg -ov -volname "scrptr" -fs HFS+ -srcfolder "build/macos/Build/Products/Release/scrptr.app"
-          hdiutil convert scrptr-rw.dmg -format UDZO -o scrptr.dmg
-        shell: bash
-      - uses: actions/upload-artifact@v3
-        with:
-          name: Upload scrptr.dmg release
-          path: scrptr.dmg
+          flutter build windows
+          dir /s
+        shell: cmd
