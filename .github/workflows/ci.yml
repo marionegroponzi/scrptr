@@ -36,10 +36,13 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Install Flutter and build
+      - name: Install Flutter
         run: |
           choco install flutter
           refreshenv
+        shell: cmd
+      - name: Build scrptr
+        run: |
           flutter --version
           flutter pub get
           flutter analyze
