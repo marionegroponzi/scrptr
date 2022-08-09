@@ -39,9 +39,10 @@ jobs:
       - name: Install Flutter and build
         run: |
           choco install flutter
+          refreshenv
           flutter --version
           flutter pub get
           flutter analyze
           flutter build windows
-          dir /s
+          dir /s build
         shell: cmd
