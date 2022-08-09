@@ -39,11 +39,11 @@ jobs:
       - name: Install Flutter
         run: |
           choco install --no-progress flutter
-          Get-ChildItem C:\tools\flutter
+          Get-ChildItem C:\tools\flutter\bin
         shell: powershell
       - name: Build scrptr
         run: |
-          flutter --version
+          flutter.exe --version
           flutter pub get
           flutter analyze
           flutter build windows
