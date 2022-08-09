@@ -39,13 +39,13 @@ jobs:
       - name: Install Flutter
         run: |
           choco install flutter
-          refreshenv
-        shell: cmd
+          Get-ChildItem D:\Tools
+        shell: powershell
       - name: Build scrptr
         run: |
           flutter --version
           flutter pub get
           flutter analyze
           flutter build windows
-          dir /s build
-        shell: cmd
+          Get-ChildItem build
+        shell: powershell
