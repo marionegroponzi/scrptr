@@ -9,28 +9,29 @@ on:
   workflow_dispatch:
 
 jobs:
-#  build-macos:
-#    name: Build on macOS
-#    runs-on: macos-latest
-#    steps:
-#      - uses: actions/checkout@v3
-#      - name: Install Flutter and build
-#        run: |
-#          brew install --cask flutter
-#          flutter --version
-#          flutter pub get
-#          flutter analyze
-#          flutter build macos
-#        shell: bash
-#      - name: Build dmg file
-#        run: |
-#          hdiutil create scrptr-rw.dmg -ov -volname "scrptr" -fs HFS+ -srcfolder "build/macos/Build/Products/Release/scrptr.app"
-#          hdiutil convert scrptr-rw.dmg -format UDZO -o scrptr.dmg
-#        shell: bash
-#      - uses: actions/upload-artifact@v3
-#        with:
-#          name: Upload scrptr.dmg release
-#          path: scrptr.dmg
+  build-macos:
+    name: Build on macOS
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Flutter and build
+        run: |
+          brew install --cask flutter
+          flutter --version
+          flutter pub get
+          flutter analyze
+          flutter build macos
+        shell: bash
+      - name: Build dmg file
+        run: |
+          hdiutil create scrptr-rw.dmg -ov -volname "scrptr" -fs HFS+ -srcfolder "build/macos/Build/Products/Release/scrptr.app"
+          hdiutil convert scrptr-rw.dmg -format UDZO -o scrptr.dmg
+        shell: bash
+      - name: Archive scrptr-release.dmg
+        uses: actions/upload-artifact@v3
+        with:
+          name: scrptr-release.dmg
+          path: scrptr.dmg
   build-windows:
     name: Build on Windows
     runs-on: windows-latest
@@ -50,11 +51,12 @@ jobs:
           flutter build windows
           Get-ChildItem build\windows\runner\release
         shell: powershell
-      - name: Compress and Archive
+      - name: Compress
         run: |
           Compress-Archive -Path build\windows\runner\release -DestinationPath scrptr.zip
         shell: powershell
-      - uses: actions/upload-artifact@v3
+      - name: Archive scrptr-release.zip
+        uses: actions/upload-artifact@v3
         with:
-          name: Upload scrptr.zip release
+          name: scrptr-release
           path: scrptr.zip
