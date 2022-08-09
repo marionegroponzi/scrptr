@@ -40,6 +40,8 @@ jobs:
         run: |
           choco install --no-progress flutter
           Get-ChildItem C:\tools\flutter\bin
+          refreshenv
+          $Env:Path
         shell: powershell
       - name: Build scrptr
         run: |
