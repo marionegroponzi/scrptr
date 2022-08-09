@@ -48,5 +48,5 @@ jobs:
           flutter pub get
           flutter analyze
           flutter build windows
-          Get-ChildItem build\windows
+          Get-ChildItem build\windows\runner\release
         shell: powershell
