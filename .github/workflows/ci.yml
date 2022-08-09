@@ -45,6 +45,7 @@ jobs:
         shell: powershell
       - name: Build scrptr
         run: |
+          $Env:PATH = "C:\tools\flutter\bin;$Env:PATH"
           $Env:Path
           flutter --version
           flutter pub get
