@@ -43,7 +43,8 @@ jobs:
         shell: powershell
       - name: Build scrptr
         run: |
-          flutter.exe --version
+          $Env:Path
+          flutter --version
           flutter pub get
           flutter analyze
           flutter build windows
