@@ -50,3 +50,11 @@ jobs:
           flutter build windows
           Get-ChildItem build\windows\runner\release
         shell: powershell
+      - name: Compress and Archive
+        run: |
+          Compress-Archive -Path build\windows\runner\release -DestinationPath scrptr.zip
+        shell: powershell
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Upload scrptr.zip release
+          path: scrptr.zip
