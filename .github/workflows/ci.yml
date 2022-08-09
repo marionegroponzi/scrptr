@@ -40,16 +40,13 @@ jobs:
         run: |
           choco install --no-progress flutter
           Get-ChildItem C:\tools\flutter\bin
-          refreshenv
-          $Env:Path
         shell: powershell
       - name: Build scrptr
         run: |
           $Env:PATH = "C:\tools\flutter\bin;$Env:PATH"
-          $Env:Path
           flutter --version
           flutter pub get
           flutter analyze
           flutter build windows
-          Get-ChildItem build
+          Get-ChildItem build\windows
         shell: powershell
