@@ -44,15 +44,38 @@ class ItemDetails extends StatelessWidget {
     final Widget content = Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Expanded(
-          child: Container(),
-        ),
+        const Spacer(),
         Text(
-          item?.subtitle ?? 'Please select one item on the left.',
+          item?.subtitle ?? 'Please select one script on the left.',
           style: textTheme.subtitle1,
         ),
-        Expanded(
-          child: Container(),
+        const Spacer(flex: 1),
+        const Expanded(
+          flex: 2,
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: TextField(
+              maxLines: null,
+              expands: true,
+              readOnly: true,
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white,
+                hoverColor: Colors.white,
+                contentPadding: EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey),
+                ),
+                disabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey),
+                ),
+
+              ),
+            ),
+          ),
         ),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           Expanded(
