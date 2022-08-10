@@ -11,15 +11,15 @@ class Item {
 
 final List<Item> items = <Item>[
   Item(
-    title: 'Item 1',
+    title: 'Script 1',
     subtitle: 'This is the first script.',
   ),
   Item(
-    title: 'Item 2',
+    title: 'Script 2',
     subtitle: 'This is the second script.',
   ),
   Item(
-    title: 'Item 3',
+    title: 'Script 3',
     subtitle: 'This is the third script.',
   ),
 ];
