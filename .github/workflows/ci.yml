@@ -51,13 +51,13 @@ jobs:
           flutter build windows
 #          Get-ChildItem build\windows\runner\release -Recurse -Force
         shell: powershell
-#      - name: Copy and Compress
-#        run: |
-#          Copy-Item -Path "C:\Android\android-sdk\emulator\msvcp140.dll" -Destination "build\windows\runner\release"
-#          Copy-Item -Path "C:\Android\android-sdk\emulator\vcruntime140.dll" -Destination "build\windows\runner\release"
-#          Copy-Item -Path "C:\Android\android-sdk\emulator\vcruntime140_1.dll" -Destination "build\windows\runner\release"
-#          Compress-Archive -Path build\windows\runner\release -DestinationPath scrptr.zip
-#        shell: powershell
+      - name: Copy and Compress
+        run: |
+          Copy-Item -Path "C:\Android\android-sdk\emulator\msvcp140.dll" -Destination "build\windows\runner\release"
+          Copy-Item -Path "C:\Android\android-sdk\emulator\vcruntime140.dll" -Destination "build\windows\runner\release"
+          Copy-Item -Path "C:\Android\android-sdk\emulator\vcruntime140_1.dll" -Destination "build\windows\runner\release"
+          Compress-Archive -Path build\windows\runner\release -DestinationPath scrptr.zip
+        shell: powershell
 #      - name: Archive scrptr-release.zip
 #        uses: actions/upload-artifact@v3
 #        with:
