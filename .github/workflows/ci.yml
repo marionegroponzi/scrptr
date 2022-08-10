@@ -58,8 +58,8 @@ jobs:
           Copy-Item -Path "C:\Android\android-sdk\emulator\vcruntime140_1.dll" -Destination "build\windows\runner\release"
           Compress-Archive -Path build\windows\runner\release -DestinationPath scrptr.zip
         shell: powershell
-#      - name: Archive scrptr-release.zip
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: scrptr-release
-#          path: scrptr.zip
+      - name: Archive scrptr-release.zip
+        uses: actions/upload-artifact@v3
+        with:
+          name: scrptr-release
+          path: scrptr.zip
