@@ -1,8 +1,8 @@
-import 'dart:io';
+// import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
+// import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
+// import 'package:path_provider/path_provider.dart';
 import 'package:scrptr/models/item.dart';
 
 class ItemDetails extends StatelessWidget {
@@ -15,26 +15,27 @@ class ItemDetails extends StatelessWidget {
   final bool isInTabletLayout;
   final Item? item;
 
-  _onPressed() async {
-    debugPrint("Running ${item?.subtitle ?? '...nope'}");
-    final directory = (await getApplicationDocumentsDirectory()).path;
-    debugPrint(directory);
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
-
-    if (result != null) {
-      // File file = File(result.files.single.path!);
-      debugPrint(result.files.single.path!);
-      final exResult = await Process.run('cat', [result.files.single.path!]);
-      debugPrint(exResult.stdout.toString());
-
-
-
-    } else {
-      // User canceled the picker
-    }
-      // setState(() {
-      //   file = io.Directory("$directory/resume/").listSync();  //use your folder name instead of resume.
-      // });
+  _onRun() async {
+    debugPrint("_onRun");
+    // debugPrint("Running ${item?.subtitle ?? '...nope'}");
+    // final directory = (await getApplicationDocumentsDirectory()).path;
+    // debugPrint(directory);
+    // FilePickerResult? result = await FilePicker.platform.pickFiles();
+    //
+    // if (result != null) {
+    //   // File file = File(result.files.single.path!);
+    //   debugPrint(result.files.single.path!);
+    //   final exResult = await Process.run('cat', [result.files.single.path!]);
+    //   debugPrint(exResult.stdout.toString());
+    //
+    //
+    //
+    // } else {
+    //   // User canceled the picker
+    // }
+    //   // setState(() {
+    //   //   file = io.Directory("$directory/resume/").listSync();  //use your folder name instead of resume.
+    //   // });
   }
 
   @override
@@ -47,7 +48,7 @@ class ItemDetails extends StatelessWidget {
           child: Container(),
         ),
         Text(
-          item?.subtitle ?? 'Please select one on the left.',
+          item?.subtitle ?? 'Please select one item on the left.',
           style: textTheme.subtitle1,
         ),
         Expanded(
@@ -64,7 +65,7 @@ class ItemDetails extends StatelessWidget {
                   // Background color
                   primary: Theme.of(context).colorScheme.primary,
                 ).copyWith(elevation: ButtonStyleButton.allOrNull(10.0)),
-                onPressed: _onPressed,
+                onPressed: _onRun,
                 child: const Padding(
                   padding: EdgeInsets.all(12.0),
                   child: Text(
