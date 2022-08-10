@@ -40,29 +40,26 @@ jobs:
       - name: Install Flutter
         run: |
           choco install --no-progress flutter
-          Get-ChildItem C:\tools\flutter\bin
+          Get-ChildItem "C:\tools\flutter\bin"
         shell: powershell
       - name: Build scrptr
         run: |
-#          Get-Childitem –Path C:\ -Include msvcp140.dll -Recurse -ErrorAction SilentlyContinue
-#          Get-Childitem –Path C:\ -Include vcruntime140.dll -Recurse -ErrorAction SilentlyContinue
-#          Get-Childitem –Path C:\ -Include vcruntime140_1.dll -Recurse -ErrorAction SilentlyContinue
           $Env:PATH = "C:\tools\flutter\bin;$Env:PATH"
           flutter --version
           flutter pub get
           flutter analyze
           flutter build windows
-          Get-ChildItem build\windows\runner\release -Recurse -Force
+#          Get-ChildItem build\windows\runner\release -Recurse -Force
         shell: powershell
-      - name: Copy and Compress
-        run: |
-          Copy-Item -Path "C:\Android\android-sdk\emulator\msvcp140.dll" -Destination "build\windows\runner\release"
-          Copy-Item -Path "C:\Android\android-sdk\emulator\vcruntime140.dll" -Destination "build\windows\runner\release"
-          Copy-Item -Path "C:\Android\android-sdk\emulator\vcruntime140_1.dll" -Destination "build\windows\runner\release"
-          Compress-Archive -Path build\windows\runner\release -DestinationPath scrptr.zip
-        shell: powershell
-      - name: Archive scrptr-release.zip
-        uses: actions/upload-artifact@v3
-        with:
-          name: scrptr-release
-          path: scrptr.zip
+#      - name: Copy and Compress
+#        run: |
+#          Copy-Item -Path "C:\Android\android-sdk\emulator\msvcp140.dll" -Destination "build\windows\runner\release"
+#          Copy-Item -Path "C:\Android\android-sdk\emulator\vcruntime140.dll" -Destination "build\windows\runner\release"
+#          Copy-Item -Path "C:\Android\android-sdk\emulator\vcruntime140_1.dll" -Destination "build\windows\runner\release"
+#          Compress-Archive -Path build\windows\runner\release -DestinationPath scrptr.zip
+#        shell: powershell
+#      - name: Archive scrptr-release.zip
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: scrptr-release
+#          path: scrptr.zip
