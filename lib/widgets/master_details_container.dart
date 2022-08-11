@@ -17,6 +17,8 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
   static const int kTabletBreakpoint = 600;
 
   Item? _selectedItem;
+  final TextEditingController _stdoutController = TextEditingController();
+  final TextEditingController _stderrController = TextEditingController();
 
   _onSelectionChanged(item) {
     setState(() {
@@ -32,6 +34,10 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
       final exResult = await Process.run(cmds[0], cmds.sublist(1), runInShell: true);
       debugPrint(exResult.stdout.toString());
       debugPrint(exResult.stderr.toString());
+      setState(() {
+        _stdoutController.text = exResult.stdout.toString();
+        _stderrController.text = exResult.stderr.toString();
+      });
     } else {
       debugPrint("Nothing to run");
     }
@@ -60,7 +66,9 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
           child: ItemDetails(
             isInTabletLayout: true,
             item: _selectedItem,
-            runButtonPressed: _onRun
+            runButtonPressed: _onRun,
+            stdoutController: _stdoutController,
+            stderrController: _stderrController,
           ),
         ),
       ],

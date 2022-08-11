@@ -7,37 +7,22 @@ import 'package:scrptr/models/item.dart';
 import 'package:scrptr/app_widgets/app_button.dart';
 import 'package:scrptr/app_widgets/app_textarea.dart';
 
-class ItemDetails extends StatelessWidget {
-  const ItemDetails({Key? key, required this.isInTabletLayout, required this.item, required this.runButtonPressed})
+class ItemDetails extends StatefulWidget {
+  const ItemDetails({Key? key, required this.isInTabletLayout, required this.item, required this.runButtonPressed, required this.stdoutController, required this.stderrController})
       : super(key: key);
 
   final bool isInTabletLayout;
   final Item? item;
   final Function(AppButton? button) runButtonPressed;
+  final TextEditingController stdoutController;
+  final TextEditingController stderrController;
 
+  @override
+  State<ItemDetails> createState() => _ItemDetailsState();
+}
+
+class _ItemDetailsState extends State<ItemDetails> {
   // _onRun() async {
-  //   debugPrint("_onRun");
-  // debugPrint("Running ${item?.subtitle ?? '...nope'}");
-  // final directory = (await getApplicationDocumentsDirectory()).path;
-  // debugPrint(directory);
-  // FilePickerResult? result = await FilePicker.platform.pickFiles();
-  //
-  // if (result != null) {
-  //   // File file = File(result.files.single.path!);
-  //   debugPrint(result.files.single.path!);
-  //   final exResult = await Process.run('cat', [result.files.single.path!]);
-  //   debugPrint(exResult.stdout.toString());
-  //
-  //
-  //
-  // } else {
-  //   // User canceled the picker
-  // }
-  //   // setState(() {
-  //   //   file = io.Directory("$directory/resume/").listSync();  //use your folder name instead of resume.
-  //   // });
-  // }
-
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
@@ -46,7 +31,7 @@ class ItemDetails extends StatelessWidget {
       children: [
         const Spacer(),
         Text(
-          item?.command ?? 'Please select one script on the left.',
+          widget.item?.command ?? 'Please select one script on the left.',
           style: textTheme.subtitle1,
         ),
         const Spacer(flex: 1),
@@ -54,19 +39,19 @@ class ItemDetails extends StatelessWidget {
           flex: 2,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Flexible(child: AppTextArea(borderColor: Colors.grey,)),
-              Flexible(child: AppTextArea(borderColor: Colors.red,)),
+            children: [
+              Flexible(child: AppTextArea(borderColor: Colors.grey, controller: widget.stdoutController)),
+              Flexible(child: AppTextArea(borderColor: Colors.red, controller: widget.stderrController,)),
             ],
           ),
         ),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          AppButton(buttonPressed: runButtonPressed, buttonTitle: "Run", item: item),
+          AppButton(buttonPressed: widget.runButtonPressed, buttonTitle: "Run", item: widget.item),
         ])
       ],
     );
 
-    if (isInTabletLayout) {
+    if (widget.isInTabletLayout) {
       return Center(child: content);
     }
 
