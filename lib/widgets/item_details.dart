@@ -10,13 +10,15 @@ class ItemDetails extends StatelessWidget {
     Key? key,
     required this.isInTabletLayout,
     required this.item,
+    required this.runButtonPressed
   }) : super(key: key);
 
   final bool isInTabletLayout;
   final Item? item;
+  final Function(Item? item) runButtonPressed;
 
-  _onRun() async {
-    debugPrint("_onRun");
+  // _onRun() async {
+  //   debugPrint("_onRun");
     // debugPrint("Running ${item?.subtitle ?? '...nope'}");
     // final directory = (await getApplicationDocumentsDirectory()).path;
     // debugPrint(directory);
@@ -36,7 +38,7 @@ class ItemDetails extends StatelessWidget {
     //   // setState(() {
     //   //   file = io.Directory("$directory/resume/").listSync();  //use your folder name instead of resume.
     //   // });
-  }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +90,9 @@ class ItemDetails extends StatelessWidget {
                   // Background color
                   primary: Theme.of(context).colorScheme.primary,
                 ).copyWith(elevation: ButtonStyleButton.allOrNull(10.0)),
-                onPressed: _onRun,
+                onPressed: () => {
+                  runButtonPressed(item)
+                },
                 child: const Padding(
                   padding: EdgeInsets.all(12.0),
                   child: Text(

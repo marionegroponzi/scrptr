@@ -12,11 +12,11 @@ class Item {
 final List<Item> items = <Item>[
   Item(
     title: 'Java version',
-    command: 'java -version.',
+    command: 'java -version',
   ),
   Item(
     title: 'ADB version',
-    command: 'adb --version.',
+    command: 'adb --version',
   ),
   Item(
     title: 'Script 3',

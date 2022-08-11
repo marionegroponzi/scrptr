@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:scrptr/models/item.dart';
 import 'package:scrptr/widgets/item_details.dart';
@@ -40,6 +42,18 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
           child: ItemDetails(
             isInTabletLayout: true,
             item: _selectedItem,
+            runButtonPressed: (item) async {
+              if (item != null) {
+                debugPrint("Running ${item.command}");
+                final cmds = item.command.split(" ");
+                final exResult = await Process.run(cmds[0], cmds.sublist(1), runInShell: true);
+                debugPrint(exResult.stdout.toString());
+                debugPrint(exResult.stderr.toString());
+              } else {
+                debugPrint("Nothing to run");
+              }
+
+            }
           ),
         ),
       ],
