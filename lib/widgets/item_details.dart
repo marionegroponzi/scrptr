@@ -8,7 +8,13 @@ import 'package:scrptr/app_widgets/app_button.dart';
 import 'package:scrptr/app_widgets/app_textarea.dart';
 
 class ItemDetails extends StatefulWidget {
-  const ItemDetails({Key? key, required this.isInTabletLayout, required this.item, required this.runButtonPressed, required this.stdoutController, required this.stderrController})
+  const ItemDetails(
+      {Key? key,
+      required this.isInTabletLayout,
+      required this.item,
+      required this.runButtonPressed,
+      required this.stdoutController,
+      required this.stderrController})
       : super(key: key);
 
   final bool isInTabletLayout;
@@ -25,23 +31,42 @@ class _ItemDetailsState extends State<ItemDetails> {
   // _onRun() async {
   @override
   Widget build(BuildContext context) {
-    final TextTheme textTheme = Theme.of(context).textTheme;
     final Widget content = Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        const Spacer(),
-        Text(
-          widget.item?.command ?? 'Please select one script on the left.',
-          style: textTheme.subtitle1,
+        Flexible(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      widget.item?.command ?? 'Please select one script on the left.',
+                      style: const TextStyle(
+                        fontFamily: 'RobotoMono',
+                        fontSize: 16,
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
-        const Spacer(flex: 1),
-        Expanded(
-          flex: 2,
+        Flexible(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Flexible(child: AppTextArea(borderColor: Colors.grey, controller: widget.stdoutController)),
-              Flexible(child: AppTextArea(borderColor: Colors.red, controller: widget.stderrController,)),
+              Flexible(
+                  child: AppTextArea(
+                borderColor: Colors.red,
+                controller: widget.stderrController,
+              )),
             ],
           ),
         ),
