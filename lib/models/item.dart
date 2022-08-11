@@ -2,24 +2,24 @@
 class Item {
   Item({
     required this.title,
-    required this.subtitle,
+    required this.command,
   });
 
   final String title;
-  final String subtitle;
+  final String command;
 }
 
 final List<Item> items = <Item>[
   Item(
-    title: 'Script 1',
-    subtitle: 'This is the first script.',
+    title: 'Java version',
+    command: 'java -version.',
   ),
   Item(
-    title: 'Script 2',
-    subtitle: 'This is the second script.',
+    title: 'ADB version',
+    command: 'adb --version.',
   ),
   Item(
     title: 'Script 3',
-    subtitle: 'This is the third script.',
+    command: 'This is the third script.',
   ),
 ];

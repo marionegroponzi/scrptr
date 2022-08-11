@@ -5,15 +5,13 @@ class ItemListing extends StatelessWidget {
   const ItemListing({
     Key? key,
     required this.itemSelectedCallback,
+    required this.loadButtonPressed,
     this.selectedItem,
   }) : super(key: key);
 
   final ValueChanged<Item> itemSelectedCallback;
+  final Function loadButtonPressed;
   final Item? selectedItem;
-
-  _onLoad() async {
-    debugPrint("_onLoad");
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +39,7 @@ class ItemListing extends StatelessWidget {
                   // Background color
                   primary: Theme.of(context).colorScheme.primary,
                 ).copyWith(elevation: ButtonStyleButton.allOrNull(10.0)),
-                onPressed: _onLoad,
+                onPressed: () => loadButtonPressed(),
                 child: const Padding(
                   padding: EdgeInsets.all(12.0),
                   child: Text(
