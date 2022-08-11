@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scrptr/models/item.dart';
-import 'package:scrptr/widgets/app_button.dart';
+import 'package:scrptr/app_widgets/app_button.dart';
 
 class ItemListing extends StatelessWidget {
   const ItemListing({
@@ -30,7 +30,7 @@ class ItemListing extends StatelessWidget {
           ),
         ),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          AppButton(buttonPressed: loadButtonPressed, buttonTitle: "Run"),
+          AppButton(buttonPressed: loadButtonPressed, buttonTitle: "Load"),
           // Expanded(
           //   child: Padding(
           //     padding: const EdgeInsets.all(8.0),
