@@ -28,6 +28,9 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
                   _selectedItem = item;
                 });
               },
+              loadButtonPressed: () {
+                debugPrint("_onLoad");
+              },
               selectedItem: _selectedItem,
             ),
           ),

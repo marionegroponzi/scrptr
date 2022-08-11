@@ -46,7 +46,7 @@ class ItemDetails extends StatelessWidget {
       children: [
         const Spacer(),
         Text(
-          item?.subtitle ?? 'Please select one script on the left.',
+          item?.command ?? 'Please select one script on the left.',
           style: textTheme.subtitle1,
         ),
         const Spacer(flex: 1),
