@@ -4,7 +4,8 @@
 import 'package:flutter/material.dart';
 // import 'package:path_provider/path_provider.dart';
 import 'package:scrptr/models/item.dart';
-import 'package:scrptr/widgets/app_button.dart';
+import 'package:scrptr/app_widgets/app_button.dart';
+import 'package:scrptr/app_widgets/app_textarea.dart';
 
 class ItemDetails extends StatelessWidget {
   const ItemDetails({Key? key, required this.isInTabletLayout, required this.item, required this.runButtonPressed})
@@ -49,30 +50,14 @@ class ItemDetails extends StatelessWidget {
           style: textTheme.subtitle1,
         ),
         const Spacer(flex: 1),
-        const Expanded(
+        Expanded(
           flex: 2,
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: TextField(
-              maxLines: null,
-              expands: true,
-              readOnly: true,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                hoverColor: Colors.white,
-                contentPadding: EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey),
-                ),
-                disabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey),
-                ),
-              ),
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
+              Flexible(child: AppTextArea(borderColor: Colors.grey,)),
+              Flexible(child: AppTextArea(borderColor: Colors.red,)),
+            ],
           ),
         ),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -90,4 +75,3 @@ class ItemDetails extends StatelessWidget {
     );
   }
 }
-
