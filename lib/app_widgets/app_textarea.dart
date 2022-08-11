@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
 
 class AppTextArea extends StatelessWidget {
-  const AppTextArea({
+  AppTextArea({
     Key? key,
-    required this.borderColor
+    required this.borderColor,
+    required this.controller,
   }) : super(key: key);
 
   final Color borderColor;
+  String? text;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return  Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextField(
+        controller: controller,
         maxLines: null,
         expands: true,
         readOnly: true,
+        textAlignVertical: TextAlignVertical.top,
+        style: const TextStyle(
+          fontFamily: 'RobotoMono',
+          fontSize: 12,
+        ),
         decoration: InputDecoration(
           filled: true,
           fillColor: Colors.white,
