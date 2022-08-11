@@ -12,10 +12,34 @@ class MasterDetailContainer extends StatefulWidget {
   State createState() => _ItemMasterDetailContainerState();
 }
 
+
 class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
   static const int kTabletBreakpoint = 600;
 
   Item? _selectedItem;
+
+  _onSelectionChanged(item) {
+    setState(() {
+      _selectedItem = item;
+    });
+  }
+
+  _onRun(button) async {
+    if (button?.item != null) {
+      final item = button!.item!;
+      debugPrint("Running ${item.command}");
+      final cmds = item.command.split(" ");
+      final exResult = await Process.run(cmds[0], cmds.sublist(1), runInShell: true);
+      debugPrint(exResult.stdout.toString());
+      debugPrint(exResult.stderr.toString());
+    } else {
+      debugPrint("Nothing to run");
+    }
+  }
+
+  _onLoad(button) async {
+    debugPrint("_onLoad");
+  }
 
   Widget _buildWideLayout() {
     return Row(
@@ -25,14 +49,8 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
           child: Material(
             elevation: 4.0,
             child: ItemListing(
-              itemSelectedCallback: (item) {
-                setState(() {
-                  _selectedItem = item;
-                });
-              },
-              loadButtonPressed: () {
-                debugPrint("_onLoad");
-              },
+              itemSelectedCallback: _onSelectionChanged,
+              loadButtonPressed: _onLoad,
               selectedItem: _selectedItem,
             ),
           ),
@@ -42,18 +60,7 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
           child: ItemDetails(
             isInTabletLayout: true,
             item: _selectedItem,
-            runButtonPressed: (item) async {
-              if (item != null) {
-                debugPrint("Running ${item.command}");
-                final cmds = item.command.split(" ");
-                final exResult = await Process.run(cmds[0], cmds.sublist(1), runInShell: true);
-                debugPrint(exResult.stdout.toString());
-                debugPrint(exResult.stderr.toString());
-              } else {
-                debugPrint("Nothing to run");
-              }
-
-            }
+            runButtonPressed: _onRun
           ),
         ),
       ],
