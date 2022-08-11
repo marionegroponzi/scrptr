@@ -28,7 +28,6 @@ class ItemDetails extends StatefulWidget {
 }
 
 class _ItemDetailsState extends State<ItemDetails> {
-  // _onRun() async {
   @override
   Widget build(BuildContext context) {
     final Widget content = Column(
@@ -44,7 +43,7 @@ class _ItemDetailsState extends State<ItemDetails> {
                   child: SizedBox(
                     width: double.infinity,
                     child: Text(
-                      widget.item?.command ?? 'Please select one script on the left.',
+                      widget.item?.command ?? 'Please select one command on the left.',
                       style: const TextStyle(
                         fontFamily: 'RobotoMono',
                         fontSize: 16,

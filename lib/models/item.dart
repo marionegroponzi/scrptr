@@ -18,8 +18,4 @@ final List<Item> items = <Item>[
     title: 'ADB version',
     command: 'adb --version',
   ),
-  Item(
-    title: 'Script 3',
-    command: 'This is the third script.',
-  ),
 ];
