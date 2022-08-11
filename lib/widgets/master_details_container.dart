@@ -22,6 +22,8 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
 
   _onSelectionChanged(item) {
     setState(() {
+      _stdoutController.text = "";
+      _stderrController.text = "";
       _selectedItem = item;
     });
   }
@@ -44,6 +46,8 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
   }
 
   _onLoad(button) async {
+    _stdoutController.text = "";
+    _stderrController.text = "";
     debugPrint("_onLoad");
   }
 
