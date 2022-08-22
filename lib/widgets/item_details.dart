@@ -34,6 +34,10 @@ class _ItemDetailsState extends State<ItemDetails> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Flexible(
+          // child: Flex(
+          //   children: [Text("test")],
+          //   direction: Axis.vertical,
+          // ),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -70,7 +74,7 @@ class _ItemDetailsState extends State<ItemDetails> {
           ),
         ),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          AppButton(buttonPressed: widget.runButtonPressed, buttonTitle: "Run", item: widget.item),
+          AppButton(buttonPressed: widget.runButtonPressed, buttonTitle: "Run", canBeDisabled: true, item: widget.item),
         ])
       ],
     );
