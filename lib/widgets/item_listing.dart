@@ -30,7 +30,7 @@ class ItemListing extends StatelessWidget {
           ),
         ),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          AppButton(buttonPressed: loadButtonPressed, buttonTitle: "Load"),
+          AppButton(buttonPressed: loadButtonPressed, buttonTitle: "Load", canBeDisabled: false,),
           // Expanded(
           //   child: Padding(
           //     padding: const EdgeInsets.all(8.0),
