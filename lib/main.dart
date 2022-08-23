@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:scrptr/models/data_model.dart';
+import 'package:scrptr/models/item.dart';
 import 'package:scrptr/widgets/master_details_container.dart';
 
 void main() => runApp(const MyApp());
@@ -8,12 +10,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'ScrPtr',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return DataModel(
+      items: const <Item>[],
+      key: GlobalKey(),
+      child: MaterialApp(
+        title: 'ScrPtr',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const MasterDetailContainer(),
       ),
-      home: const MasterDetailContainer(),
     );
   }
 }
