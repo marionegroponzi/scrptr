@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:scrptr/models/data_model.dart';
 import 'package:scrptr/models/item.dart';
 import 'package:scrptr/app_widgets/app_button.dart';
+
 
 class ItemListing extends StatelessWidget {
   const ItemListing({
@@ -11,11 +13,12 @@ class ItemListing extends StatelessWidget {
   }) : super(key: key);
 
   final ValueChanged<Item> itemSelectedCallback;
-  final Function(AppButton? button) loadButtonPressed;
+  final Function(BuildContext context, AppButton? button) loadButtonPressed;
   final Item? selectedItem;
 
   @override
   Widget build(BuildContext context) {
+    var items = DataModel.of(context)!.items;
     return Column(
       children: [
         Expanded(

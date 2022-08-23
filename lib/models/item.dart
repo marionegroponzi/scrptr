@@ -13,14 +13,3 @@ class Item {
   final String title;
   final String command;
 }
-
-List<Item> items = <Item>[
-  Item(
-    title: 'Java version',
-    command: 'java -version',
-  ),
-  Item(
-    title: 'ADB version',
-    command: 'adb --version',
-  ),
-];

@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+
+import 'package:scrptr/models/data_model.dart';
 import 'package:scrptr/models/item.dart';
 import 'package:scrptr/widgets/item_details.dart';
 import 'package:scrptr/widgets/item_listing.dart';
@@ -30,7 +32,7 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
     });
   }
 
-  _onRun(button) async {
+  _onRun(context, button) async {
     if (button?.item != null) {
       final item = button!.item!;
       debugPrint("Running ${item.command}");
@@ -47,7 +49,7 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
     }
   }
 
-  _onLoad(button) async {
+  _onLoad(context, button) async {
     _stdoutController.text = "";
     _stderrController.text = "";
     debugPrint("_onLoad");
@@ -62,7 +64,7 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
       final l = mapData["commands"] as List;
       final itemList = l.map((e) => Item(title: e["title"], command: e["command"])).toList();
       debugPrint(itemList.toString());
-      // items = itemList;
+      DataModel.of(context)?.items = itemList;
       setState(() {
         _stdoutController.text = "";
         _stderrController.text = "";

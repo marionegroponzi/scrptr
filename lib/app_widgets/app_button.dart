@@ -10,7 +10,7 @@ class AppButton extends StatelessWidget {
     this.item,
   }) : super(key: key);
 
-  final Function(AppButton? button) buttonPressed;
+  final Function(BuildContext context, AppButton? button) buttonPressed;
   final Item? item;
   final String buttonTitle;
   final bool canBeDisabled;
@@ -26,7 +26,7 @@ class AppButton extends StatelessWidget {
             onPrimary: Theme.of(context).colorScheme.onPrimary,
             primary: Theme.of(context).colorScheme.primary,
           ).copyWith(elevation: ButtonStyleButton.allOrNull(10.0)),
-          onPressed: (item == null && canBeDisabled) ? null : () { buttonPressed(this); },
+          onPressed: (item == null && canBeDisabled) ? null : () { buttonPressed(context, this); },
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Text(
