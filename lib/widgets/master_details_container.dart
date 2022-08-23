@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:scrptr/models/item.dart';
 import 'package:scrptr/widgets/item_details.dart';
 import 'package:scrptr/widgets/item_listing.dart';
+import 'package:yaml/yaml.dart';
 
 class MasterDetailContainer extends StatefulWidget {
   const MasterDetailContainer({Key? key}) : super(key: key);
@@ -49,6 +51,26 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
     _stdoutController.text = "";
     _stderrController.text = "";
     debugPrint("_onLoad");
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    if (result != null) {
+      final str = result.files.single.path!;
+      debugPrint(str);
+      File file = File(str);
+      final data = await file.readAsString();
+      final mapData = loadYaml(data) as Map;
+      // debugPrint(mapData.toString());
+      final l = mapData["commands"] as List;
+      final itemList = l.map((e) => Item(title: e["title"], command: e["command"])).toList();
+      debugPrint(itemList.toString());
+      // items = itemList;
+      setState(() {
+        _stdoutController.text = "";
+        _stderrController.text = "";
+        _selectedItem = null;
+      });
+    } else {
+      // User canceled the picker, nothing to do
+    }
   }
 
   Widget _buildWideLayout() {

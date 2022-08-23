@@ -5,11 +5,16 @@ class Item {
     required this.command,
   });
 
+  @override
+  String toString() {
+    return "$title - $command";
+  }
+
   final String title;
   final String command;
 }
 
-final List<Item> items = <Item>[
+List<Item> items = <Item>[
   Item(
     title: 'Java version',
     command: 'java -version',

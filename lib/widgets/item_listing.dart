@@ -31,28 +31,6 @@ class ItemListing extends StatelessWidget {
         ),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           AppButton(buttonPressed: loadButtonPressed, buttonTitle: "Load", canBeDisabled: false,),
-          // Expanded(
-          //   child: Padding(
-          //     padding: const EdgeInsets.all(8.0),
-          //     child: ElevatedButton(
-          //       style: ElevatedButton.styleFrom(
-          //         // Foreground color
-          //         onPrimary: Theme.of(context).colorScheme.onPrimary,
-          //         // Background color
-          //         primary: Theme.of(context).colorScheme.primary,
-          //       ).copyWith(elevation: ButtonStyleButton.allOrNull(10.0)),
-          //       onPressed: () => loadButtonPressed(),
-          //       child: const Padding(
-          //         padding: EdgeInsets.all(12.0),
-          //         child: Text(
-          //           "Load",
-          //           textScaleFactor: 1.4,
-          //           // style: textTheme.headline5,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
         ])
       ],
     );
