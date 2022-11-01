@@ -32,13 +32,13 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
   }
 
   _onRun(context, button) async {
-    if (button?.item != null) {
-      final item = button!.item!;
-      debugPrint("Running ${item.command}");
-      final cmds = item.command.split(" ");
+    final selectedItem = _selectedItem;
+    if (selectedItem != null) {
+      debugPrint("Running ${selectedItem.command}");
+      final cmds = selectedItem.command.split(" ");
       final exResult = await Process.run(cmds[0], cmds.sublist(1), runInShell: true);
-      debugPrint(exResult.stdout.toString());
-      debugPrint(exResult.stderr.toString());
+      // debugPrint(exResult.stdout.toString());
+      // debugPrint(exResult.stderr.toString());
       setState(() {
         _stdoutController.text = exResult.stdout.toString();
         _stderrController.text = exResult.stderr.toString();
@@ -59,7 +59,7 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
         _selectedItem = null;
       });
     } else {
-      // User canceled the picker, nothing to do
+      debugPrint("No new file selected");
     }
   }
 
