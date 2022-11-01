@@ -33,7 +33,7 @@ class ItemListing extends StatelessWidget {
           ),
         ),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          AppButton(buttonPressed: onLoadButtonPressed, buttonTitle: "Load", canBeDisabled: false,),
+          AppButton(buttonPressed: onLoadButtonPressed, buttonTitle: "Load", disabled: false,),
         ])
       ],
     );

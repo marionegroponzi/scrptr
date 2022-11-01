@@ -74,7 +74,7 @@ class _ItemDetailsState extends State<ItemDetails> {
           ),
         ),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          AppButton(buttonPressed: widget.runButtonPressed, buttonTitle: "Run", canBeDisabled: true, item: widget.item),
+          AppButton(buttonPressed: widget.runButtonPressed, buttonTitle: "Run", disabled: widget.item == null),
         ])
       ],
     );
