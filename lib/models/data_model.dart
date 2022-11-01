@@ -18,7 +18,7 @@ class DataModel extends InheritedWidget {
     return (context.dependOnInheritedWidgetOfExactType<DataModel>());
   }
 
-  Future<void> loadFile(String fileName) async {
+  loadFile(String fileName) async {
     File file = File(fileName);
     final data = await file.readAsString();
     final mapData = loadYaml(data) as Map;
@@ -26,6 +26,12 @@ class DataModel extends InheritedWidget {
     final itemList = l.map((e) => Item(title: e["title"], command: e["command"])).toList();
     items.clear();
     items.addAll(itemList);
+  }
+
+  runItem(Item selectedItem) async {
+    debugPrint("Running ${selectedItem.command}");
+    final cmds = selectedItem.command.split(" ");
+    return await Process.run(cmds[0], cmds.sublist(1), runInShell: true);
   }
   
 }
