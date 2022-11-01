@@ -31,7 +31,7 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
     });
   }
 
-  _onRun(context, button) async {
+  _onRun(context) async {
     final selectedItem = _selectedItem;
     if (selectedItem != null) {
       debugPrint("Running ${selectedItem.command}");
@@ -48,7 +48,7 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
     }
   }
 
-  _onLoad(context, button) async {
+  _onLoad(context) async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
     if (result != null) {
       final fileName = result.files.single.path!;

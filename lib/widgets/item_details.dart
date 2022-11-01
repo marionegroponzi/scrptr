@@ -19,7 +19,7 @@ class ItemDetails extends StatefulWidget {
 
   final bool isInTabletLayout;
   final Item? item;
-  final Function(BuildContext context, AppButton? button) runButtonPressed;
+  final Function(BuildContext context) runButtonPressed;
   final TextEditingController stdoutController;
   final TextEditingController stderrController;
 
