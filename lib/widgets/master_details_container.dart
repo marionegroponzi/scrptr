@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +22,8 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
   final TextEditingController _stdoutController = TextEditingController();
   final TextEditingController _stderrController = TextEditingController();
 
+  bool _loading = false;
+
   _onSelectionChanged(item) {
     setState(() {
       _stdoutController.text = "";
@@ -34,14 +35,10 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
   _onRun(context) async {
     final selectedItem = _selectedItem;
     if (selectedItem != null) {
-      debugPrint("Running ${selectedItem.command}");
-      final cmds = selectedItem.command.split(" ");
-      final exResult = await Process.run(cmds[0], cmds.sublist(1), runInShell: true);
-      // debugPrint(exResult.stdout.toString());
-      // debugPrint(exResult.stderr.toString());
+      final res = await DataModel.of(context)?.runItem(selectedItem);
       setState(() {
-        _stdoutController.text = exResult.stdout.toString();
-        _stderrController.text = exResult.stderr.toString();
+        _stdoutController.text = res.stdout.toString();
+        _stderrController.text = res.stderr.toString();
       });
     } else {
       debugPrint("Nothing to run");
@@ -49,7 +46,13 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
   }
 
   _onLoad(context) async {
+    if (_loading) {
+      // prevnet users from pressing the Load button multiple times without selecting
+      return;
+    }
+    _loading = true;
     FilePickerResult? result = await FilePicker.platform.pickFiles();
+    _loading = false;
     if (result != null) {
       final fileName = result.files.single.path!;
       await DataModel.of(context)?.loadFile(fileName);
