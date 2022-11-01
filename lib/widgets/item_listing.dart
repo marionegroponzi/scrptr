@@ -13,7 +13,7 @@ class ItemListing extends StatelessWidget {
   }) : super(key: key);
 
   final ValueChanged<Item> onSelectionChanged;
-  final Function(BuildContext context, AppButton? button) onLoadButtonPressed;
+  final Function(BuildContext context) onLoadButtonPressed;
   final Item? selectedItem;
 
   @override
