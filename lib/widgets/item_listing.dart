@@ -7,13 +7,13 @@ import 'package:scrptr/app_widgets/app_button.dart';
 class ItemListing extends StatelessWidget {
   const ItemListing({
     Key? key,
-    required this.itemSelectedCallback,
-    required this.loadButtonPressed,
+    required this.onSelectionChanged,
+    required this.onLoadButtonPressed,
     this.selectedItem,
   }) : super(key: key);
 
-  final ValueChanged<Item> itemSelectedCallback;
-  final Function(BuildContext context, AppButton? button) loadButtonPressed;
+  final ValueChanged<Item> onSelectionChanged;
+  final Function(BuildContext context, AppButton? button) onLoadButtonPressed;
   final Item? selectedItem;
 
   @override
@@ -26,14 +26,14 @@ class ItemListing extends StatelessWidget {
             children: items.map((item) {
               return ListTile(
                 title: Text(item.title),
-                onTap: () => itemSelectedCallback(item),
+                onTap: () => onSelectionChanged(item),
                 selected: selectedItem == item,
               );
             }).toList(),
           ),
         ),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          AppButton(buttonPressed: loadButtonPressed, buttonTitle: "Load", canBeDisabled: false,),
+          AppButton(buttonPressed: onLoadButtonPressed, buttonTitle: "Load", canBeDisabled: false,),
         ])
       ],
     );
