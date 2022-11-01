@@ -64,7 +64,8 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
       final l = mapData["commands"] as List;
       final itemList = l.map((e) => Item(title: e["title"], command: e["command"])).toList();
       debugPrint(itemList.toString());
-      DataModel.of(context)?.items = itemList;
+      DataModel.of(context)?.items.clear();
+      DataModel.of(context)?.items.addAll(itemList);
       setState(() {
         _stdoutController.text = "";
         _stderrController.text = "";
