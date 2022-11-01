@@ -23,7 +23,20 @@ class DataModel extends InheritedWidget {
     final data = await file.readAsString();
     final mapData = loadYaml(data) as Map;
     final l = mapData["commands"] as List;
-    final itemList = l.map((e) => Item(title: e["title"], command: e["command"])).toList();
+
+    final itemList = l.map((e) {
+      final params = e["parameters"];
+      if (params != null) {
+        return Item(title: e["title"],
+            command: e["command"],
+            parameters: List<String>.from(params));
+      } else {
+        return Item(title: e["title"],
+            command: e["command"],
+            parameters: null);
+      }
+    }).toList();
+
     items.clear();
     items.addAll(itemList);
   }

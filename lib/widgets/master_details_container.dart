@@ -47,7 +47,7 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
 
   _onLoad(context) async {
     if (_loading) {
-      // prevnet users from pressing the Load button multiple times without selecting
+      // prevent users from pressing the Load button multiple times without selecting
       return;
     }
     _loading = true;
