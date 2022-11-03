@@ -1,5 +1,0 @@
-commands:
-  - title: Java version
-    command: java -version
-  - title: adb version
-    command: adb --version

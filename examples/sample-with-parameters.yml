@@ -1,0 +1,11 @@
+commands:
+  - title: Java version
+    command: java -version
+  - title: adb version
+    command: adb --version
+  - title: adb devices
+    command: adb devices
+  - title: adb connect $ip_address
+    command: adb connect $ip_address
+    parameters:
+     - ip_address
