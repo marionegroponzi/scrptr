@@ -5,7 +5,10 @@ commands:
     command: adb --version
   - title: adb devices
     command: adb devices
-  - title: adb connect $ip_address
+  - title: adb connect
     command: adb connect $ip_address
-    parameters:
-     - ip_address
+    args:
+     - title: ip_address
+       default: 127.0.0.1
+     - title: another_ip_address
+       default: 127.0.0.2

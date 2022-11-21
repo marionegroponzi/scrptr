@@ -18,6 +18,15 @@ class DataModel extends InheritedWidget {
     return (context.dependOnInheritedWidgetOfExactType<DataModel>());
   }
 
+  List<Parameter> parseParameters(params) {
+    var res = List<Parameter>.empty(growable: true);
+    for (var p in params) {
+      var parameter = Parameter(p["title"], p["default"], p["default"]);
+      res.add(parameter);
+    }
+    return res;
+  }
+
   loadFile(String fileName) async {
     File file = File(fileName);
     final data = await file.readAsString();
@@ -29,11 +38,12 @@ class DataModel extends InheritedWidget {
       if (params != null) {
         return Item(title: e["title"],
             command: e["command"],
-            parameters: List<String>.from(params));
+            args: parseParameters(params),
+        );
       } else {
         return Item(title: e["title"],
             command: e["command"],
-            parameters: null);
+            args: null);
       }
     }).toList();
 
