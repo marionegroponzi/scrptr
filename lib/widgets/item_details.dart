@@ -47,6 +47,7 @@ class _ItemDetailsState extends State<ItemDetails> {
 
   @override
   Widget build(BuildContext context) {
+
     final Widget content = Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -80,18 +81,22 @@ class _ItemDetailsState extends State<ItemDetails> {
           child: ListView.builder(
             itemCount: getLength(),
             itemBuilder: (context, index) {
+              final arg = getArg(index)!;
+              final TextEditingController _textController = TextEditingController();
+              _textController.text = arg.value;
+
               return ListTile(
                   title: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 4.0),
                     child: TextFormField(
+                      controller: _textController,
                       showCursor: true,
-                      initialValue: getArg(index)!.defaultValue,
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
-                        helperText: getArg(index)!.title,
+                        helperText: arg.title,
                       ),
                       onChanged: (text) {
-                        getArg(index)!.value = text;
+                        arg.value = text;
                       },
                     ),
                   ));

@@ -10,5 +10,8 @@ commands:
     args:
      - title: ip_address
        default: 127.0.0.1
-     - title: another_ip_address
-       default: 127.0.0.2
+  - title: ls
+    command: ls $folder
+    args:
+      - title: folder
+        default: .
