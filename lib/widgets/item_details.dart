@@ -81,15 +81,15 @@ class _ItemDetailsState extends State<ItemDetails> {
           child: ListView.builder(
             itemCount: getLength(),
             itemBuilder: (context, index) {
-              final arg = getArg(index)!;
-              final TextEditingController _textController = TextEditingController();
-              _textController.text = arg.value;
+              final Arg arg = getArg(index)!;
+              final TextEditingController textController = TextEditingController();
+              textController.text = arg.value;
 
               return ListTile(
                   title: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 4.0),
                     child: TextFormField(
-                      controller: _textController,
+                      controller: textController,
                       showCursor: true,
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
