@@ -9,13 +9,14 @@ import 'package:scrptr/app_widgets/app_button.dart';
 import 'package:scrptr/app_widgets/app_textarea.dart';
 
 class ItemDetails extends StatefulWidget {
-  const ItemDetails({Key? key,
+  const ItemDetails({
+    Key? key,
     required this.isInTabletLayout,
     required this.item,
     required this.runButtonPressed,
     required this.stdoutController,
-    required this.stderrController,})
-      : super(key: key);
+    required this.stderrController,
+  }) : super(key: key);
 
   final bool isInTabletLayout;
   final Item? item;
@@ -28,25 +29,25 @@ class ItemDetails extends StatefulWidget {
 }
 
 class _ItemDetailsState extends State<ItemDetails> {
-  String getParameter(int index) {
+  Parameter? getParameter(int index) {
     final item = widget.item;
-    if (item != null && item.parameters != null && index < item.parameters!.length) {
-      return item.parameters![index];
+    if (item != null && item.args != null && index < item.args!.length) {
+      return item.args![index];
     }
-    return "";
+    return null;
   }
 
   getLength() {
     final item = widget.item;
-    if (item != null && item.parameters != null) {
-      return item.parameters!.length;
+    if (item != null && item.args != null) {
+      return item.args!.length;
     }
     return 0;
   }
 
   @override
   Widget build(BuildContext context) {
-      final Widget content = Column(
+    final Widget content = Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Flexible(
@@ -60,8 +61,7 @@ class _ItemDetailsState extends State<ItemDetails> {
                   Row(
                     children: [
                       Text(
-                        widget.item?.command ??
-                            'Please select one command on the left.',
+                        widget.item?.command ?? 'Load a file and select one command.',
                         style: const TextStyle(
                           fontFamily: 'RobotoMono',
                           fontSize: 16,
@@ -86,16 +86,26 @@ class _ItemDetailsState extends State<ItemDetails> {
               ),
               itemBuilder: (context, index) {
                 return ListTile(
-                  leading: Text("${getParameter(index)}: "),
-                  title: TextField(
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
+                    title: Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Text("${getParameter(index)!.title}: "),
                     ),
-                    onChanged: (text) {
-                      print('First text field: $text');
-                    },
-                  )
-                );
+                    Expanded(
+                      flex: 3,
+                      child: TextFormField(
+                        initialValue: getParameter(index)!.defaultValue,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                        ),
+                        onChanged: (text) {
+                          getParameter(index)!.value = text;
+                        },
+                      ),
+                    ),
+                  ],
+                ));
               },
             ),
           ),
@@ -116,9 +126,9 @@ class _ItemDetailsState extends State<ItemDetails> {
                     Flexible(
                       flex: 10,
                       child: AppTextArea(
-                                borderColor: Colors.grey,
-                                controller: widget.stdoutController,
-                            ),
+                        borderColor: Colors.grey,
+                        controller: widget.stdoutController,
+                      ),
                     )
                   ],
                 ),
@@ -145,10 +155,7 @@ class _ItemDetailsState extends State<ItemDetails> {
           ),
         ),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          AppButton(
-              buttonPressed: widget.runButtonPressed,
-              buttonTitle: "Run",
-              disabled: widget.item == null),
+          AppButton(buttonPressed: widget.runButtonPressed, buttonTitle: "Run", disabled: widget.item == null),
         ])
       ],
     );
@@ -161,6 +168,4 @@ class _ItemDetailsState extends State<ItemDetails> {
       body: Center(child: content),
     );
   }
-
-
 }
