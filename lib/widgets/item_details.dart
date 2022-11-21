@@ -83,9 +83,9 @@ class _ItemDetailsState extends State<ItemDetails> {
               return ListTile(
                   title: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 4.0),
-                    child: TextField(
+                    child: TextFormField(
                       showCursor: true,
-                      // initialValue: getArg(index)!.defaultValue,
+                      initialValue: getArg(index)!.defaultValue,
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
                         helperText: getArg(index)!.title,
