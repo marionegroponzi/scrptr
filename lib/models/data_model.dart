@@ -52,8 +52,8 @@ class DataModel extends InheritedWidget {
   }
 
   runItem(Item selectedItem) async {
-    debugPrint("Running ${selectedItem.command}");
-    final cmds = selectedItem.command.split(" ");
+    debugPrint("Running ${selectedItem.fullCommand()}");
+    final cmds = selectedItem.fullCommand().split(" ");
     return await Process.run(cmds[0], cmds.sublist(1), runInShell: true);
   }
   

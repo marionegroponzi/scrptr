@@ -10,6 +10,14 @@ class Item {
     required this.args,
   });
 
+  fullCommand() {
+    var fullCommand = command;
+    args?.forEach((arg) {
+      fullCommand = fullCommand.replaceAll("\$${arg.title}", arg.value);
+    });
+    return fullCommand;
+  }
+
   @override
   String toString() {
     return "$title - $command - $args";
