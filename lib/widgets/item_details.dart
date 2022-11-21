@@ -29,7 +29,7 @@ class ItemDetails extends StatefulWidget {
 }
 
 class _ItemDetailsState extends State<ItemDetails> {
-  Parameter? getParameter(int index) {
+  Arg? getArg(int index) {
     final item = widget.item;
     if (item != null && item.args != null && index < item.args!.length) {
       return item.args![index];
@@ -77,37 +77,25 @@ class _ItemDetailsState extends State<ItemDetails> {
         ),
         Flexible(
           flex: 3,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: ListView.builder(
-              itemCount: getLength(),
-              prototypeItem: const ListTile(
-                title: Text(""),
-              ),
-              itemBuilder: (context, index) {
-                return ListTile(
-                    title: Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Text("${getParameter(index)!.title}: "),
-                    ),
-                    Expanded(
-                      flex: 3,
-                      child: TextFormField(
-                        initialValue: getParameter(index)!.defaultValue,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                        ),
-                        onChanged: (text) {
-                          getParameter(index)!.value = text;
-                        },
+          child: ListView.builder(
+            itemCount: getLength(),
+            itemBuilder: (context, index) {
+              return ListTile(
+                  title: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4.0),
+                    child: TextField(
+                      showCursor: true,
+                      // initialValue: getArg(index)!.defaultValue,
+                      decoration: InputDecoration(
+                        border: const OutlineInputBorder(),
+                        helperText: getArg(index)!.title,
                       ),
+                      onChanged: (text) {
+                        getArg(index)!.value = text;
+                      },
                     ),
-                  ],
-                ));
-              },
-            ),
+                  ));
+            },
           ),
         ),
         Flexible(
