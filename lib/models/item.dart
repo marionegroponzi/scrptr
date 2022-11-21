@@ -2,7 +2,7 @@
 class Item {
   final String title;
   final String command;
-  final List<Parameter>? args;
+  final List<Arg>? args;
 
   Item({
     required this.title,
@@ -18,12 +18,12 @@ class Item {
 
 }
 
-class Parameter {
+class Arg {
   final String title;
   final String defaultValue;
   String value;
 
-  Parameter(this.title, this.defaultValue, this.value);
+  Arg(this.title, this.defaultValue, this.value);
 
   @override
   String toString() {

@@ -18,11 +18,11 @@ class DataModel extends InheritedWidget {
     return (context.dependOnInheritedWidgetOfExactType<DataModel>());
   }
 
-  List<Parameter> parseParameters(params) {
-    var res = List<Parameter>.empty(growable: true);
-    for (var p in params) {
-      var parameter = Parameter(p["title"], p["default"], p["default"]);
-      res.add(parameter);
+  List<Arg> parseArgs(args) {
+    var res = List<Arg>.empty(growable: true);
+    for (var p in args) {
+      var arg = Arg(p["title"], p["default"], p["default"]);
+      res.add(arg);
     }
     return res;
   }
@@ -34,11 +34,11 @@ class DataModel extends InheritedWidget {
     final l = mapData["commands"] as List;
 
     final itemList = l.map((e) {
-      final params = e["parameters"];
-      if (params != null) {
+      final args = e["args"];
+      if (args != null) {
         return Item(title: e["title"],
             command: e["command"],
-            args: parseParameters(params),
+            args: parseArgs(args),
         );
       } else {
         return Item(title: e["title"],
