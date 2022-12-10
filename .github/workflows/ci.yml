@@ -27,10 +27,10 @@ jobs:
           hdiutil create scrptr-rw.dmg -ov -volname "scrptr" -fs HFS+ -srcfolder "build/macos/Build/Products/Release/scrptr.app"
           hdiutil convert scrptr-rw.dmg -format UDZO -o scrptr.dmg
         shell: bash
-      - name: Archive scrptr-release.dmg
+      - name: Archive scrptr-release-macos.dmg
         uses: actions/upload-artifact@v3
         with:
-          name: scrptr-release.dmg
+          name: scrptr-release-macos.dmg
           path: scrptr.dmg
   build-windows:
     name: Build on Windows
@@ -58,8 +58,13 @@ jobs:
           Copy-Item -Path "C:\Android\android-sdk\emulator\vcruntime140_1.dll" -Destination "build\windows\runner\release"
           # Compress-Archive -Path build\windows\runner\release -DestinationPath scrptr.zip
         shell: powershell
-      - name: Archive scrptr-release.zip
+      - name: Archive scrptr-release-windows.zip
         uses: actions/upload-artifact@v3
         with:
-          name: scrptr-release
+          name: scrptr-release-windows
           path: build\windows\runner\release
+      - name: Archive examples
+        uses: actions/upload-artifact@v3
+        with:
+          name: scrptr-examples
+          path: examples
